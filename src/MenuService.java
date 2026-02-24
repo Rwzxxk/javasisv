@@ -36,6 +36,7 @@ public class MenuService {
         for (Veiculo veiculo : lista_veiculos) {
             if (veiculo.getPlaca().equalsIgnoreCase(placa)) {
                 System.out.println("Erro: Já existe um carro com essa placa no estacionamento.");
+                pausar();
                 return;
 
             }
@@ -43,6 +44,8 @@ public class MenuService {
         }
         lista_veiculos.add(novo_veiculo);
         System.out.println("Veiculo adicionado com sucesso!");
+        // Pausa para o usuário confirmar
+        pausar();
     }
 
     //todo; Método que remove veículo do sistema\\
@@ -52,6 +55,8 @@ public class MenuService {
         //todo; Verifica se o usuário entrou com algum dado\\
         if (placa == null || placa.isBlank()) {
             System.out.println("Por favor digite uma placa válida");
+            pausar();
+            return;
         }
         boolean removido = lista_veiculos.removeIf(veiculo -> veiculo.getPlaca().equalsIgnoreCase(placa));
         if (removido) {
@@ -59,12 +64,14 @@ public class MenuService {
         } else {
             System.out.println("Veiculo nao encontrado!");
         }
+        pausar();
     }
 
     //todo; Método que lista os veìculos que foram adicionados\\
     public static void listarVeiculos() {
         if (lista_veiculos.isEmpty()) {
             System.out.println("Ainda não foi adicionado nenhum carro");
+            pausar();
             return;
         }
         System.out.println("--------Veículos Atuais--------");
@@ -76,6 +83,7 @@ public class MenuService {
                             "Placa:  " + veiculo.getPlaca()
             );
         }
+        pausar();
     }
 
     //todo; método que encontra o veículo pela placa\\
@@ -87,10 +95,23 @@ public class MenuService {
             if (v.getPlaca().equalsIgnoreCase(placa)) {
                 System.out.println("Veículo encontrado:");
                 System.out.println(v);
+                pausar();
                 return; // encerra o método ao encontrar
             }
         }//todo; Se não encontrou nenhum
         System.out.println("Veículo não encontrado.");
+        pausar();
+    }
+
+    // Método utilitário que pausa a execução até o usuário pressionar ENTER
+    public static void pausar() {
+        pausar("Pressione ENTER para continuar...");
+    }
+
+    // Sobrecarga que aceita uma mensagem personalizada
+    public static void pausar(String mensagem) {
+        System.out.println(mensagem);
+        // Aguarda o usuário pressionar ENTER
+        sc.nextLine();
     }
 }
-
