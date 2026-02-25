@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class Main {
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
+        MenuService menuService = new MenuService();
         boolean rodando = true;
         while (rodando) {
             System.out.println("-------------------------------------------------------");
@@ -19,19 +20,19 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    MenuService.adicionaVeiculo();
+                    menuService.adicionaVeiculo();
                     break;
 
                 case 2:
-                    MenuService.listarVeiculos();
+                    menuService.verLista();
                     break;
 
                 case 3:
-                    MenuService.encontrarVeiculo();
+                    menuService.encontrarVeiculo();
                     break;
 
                 case 4:
-                    MenuService.removeVeiculo();
+                    menuService.removeVeiculo();
                     break;
 
                 case 0:
